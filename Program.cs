@@ -51,6 +51,14 @@ namespace Console_Based_Student_Management_System
                     Console.Write("Enter Student ID to update: ");
                     int id = int.Parse(Console.ReadLine());
 
+                    var existingStudent = business.GetStudentById(id);
+
+                    if (existingStudent == null)
+                    {
+                        Console.WriteLine("Student not found!");
+                        continue;
+                    }
+
                     Console.WriteLine("Enter new details:");
 
                     var student = view.CaptureStudent();

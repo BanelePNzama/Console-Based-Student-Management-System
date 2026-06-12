@@ -64,5 +64,10 @@ namespace Console_Based_Student_Management_System.Student_Management
         {
             return _context.Database.SqlQuery<StudentsInfo>("EXEC GetAllStudents").ToList();
         }
+        public StudentsInfo GetStudentById(int id)
+        {
+            return _context.Students
+                .FirstOrDefault(s => s.StudentId == id);
+        }
     }
 }

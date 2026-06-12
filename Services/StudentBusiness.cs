@@ -53,6 +53,9 @@ namespace Console_Based_Student_Management_System.Services
             return _repository.GetAllStudents();
         }
 
-
+        public StudentsInfo GetStudentById(int id)
+        {
+            return _repository.GetStudentById(id);
+        }
     }
 }
