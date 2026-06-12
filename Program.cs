@@ -37,6 +37,12 @@ namespace Console_Based_Student_Management_System
                     Console.Write("Enter Student ID to remove: ");
                     int id = int.Parse(Console.ReadLine());
 
+                    var existingStudent = business.GetStudentById(id);
+                    if (existingStudent == null)
+                    {
+                        Console.WriteLine("Student not found!");
+                        continue;
+                    }
                     StudentsInfo student = new StudentsInfo
                     {
                         StudentId = id
