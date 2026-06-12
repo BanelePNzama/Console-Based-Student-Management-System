@@ -17,8 +17,8 @@ namespace Console_Based_Student_Management_System.Student_Management
 
         public void AddStudent(StudentsInfo student)
         {
-            _context.Database.ExecuteSqlCommand(
-               "EXEC dbo.AddStudents @StudentName, @StudentSurname, @CourseName, @StudentEmail, @StudentPhone, @StudentGender, @StudentBirthDate, @StudentAddress, @StudentHasRes", new SqlParameter("@StudentName", student.StudentName),
+            SqlParameter[] parameters = {
+                new SqlParameter("@StudentName", student.StudentName),   
                 new SqlParameter("@StudentSurname", student.StudentSurname),
                 new SqlParameter("@CourseName", student.CourseName),
                 new SqlParameter("@StudentEmail", student.StudentEmail),
@@ -27,13 +27,16 @@ namespace Console_Based_Student_Management_System.Student_Management
                 new SqlParameter("@StudentBirthDate", student.StudentBirthDate),
                 new SqlParameter("@StudentAddress", student.StudentAddress),
                 new SqlParameter("@StudentHasRes", student.StudentHasRes)
-            );
-        }
+            };
+
+            _context.Database.ExecuteSqlCommand(
+                "EXEC dbo.AddStudents @StudentName, @StudentSurname, @CourseName, @StudentEmail, @StudentPhone, @StudentGender, @StudentBirthDate, @StudentAddress, @StudentHasRes", parameters);
+
+         }
 
         public void UpdateStudent(StudentsInfo student)
         {
-            _context.Database.ExecuteSqlCommand(
-                "EXEC UpdateStudent @StudentId, @StudentName, @StudentSurname, @CourseName, @StudentEmail, @StudentPhone, @StudentGender, @StudentBirthDate, @StudentAddress, @StudentHasRes",
+            SqlParameter[] parameters = {
                 new SqlParameter("@StudentId", student.StudentId),
                 new SqlParameter("@StudentName", student.StudentName),
                 new SqlParameter("@StudentSurname", student.StudentSurname),
@@ -44,14 +47,16 @@ namespace Console_Based_Student_Management_System.Student_Management
                 new SqlParameter("@StudentBirthDate", student.StudentBirthDate),
                 new SqlParameter("@StudentAddress", student.StudentAddress),
                 new SqlParameter("@StudentHasRes", student.StudentHasRes)
-            );
+            };
+            _context.Database.ExecuteSqlCommand(
+                "EXEC UpdateStudent @StudentId, @StudentName, @StudentSurname, @CourseName, @StudentEmail, @StudentPhone, @StudentGender, @StudentBirthDate, @StudentAddress, @StudentHasRes", parameters);
         }
 
         public void RemoveStudent(int studentId)
         {
             _context.Database.ExecuteSqlCommand(
                 "EXEC DeleteStudent @StudentId",
-                new SqlParameter("@StudentId", studentId)
+                   new SqlParameter("@StudentId", studentId)
             );
         }
 
